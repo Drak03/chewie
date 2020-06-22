@@ -128,10 +128,17 @@ class ChewieState extends State<Chewie> {
 
     SystemChrome.setEnabledSystemUIOverlays([]);
     if (isAndroid) {
+        if(widget.controller.isPortraitMode){
+            SystemChrome.setPreferredOrientations([
+       DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+      ]);}
+      else{       
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
+      }
     }
 
     if (!widget.controller.allowedScreenSleep) {
@@ -192,6 +199,7 @@ class ChewieController extends ChangeNotifier {
       DeviceOrientation.landscapeRight,
     ],
     this.routePageBuilder = null,
+    this.isPortraitMode=false  
   }) : assert(videoPlayerController != null,
             'You must provide a controller to play a video') {
     _initialize();
@@ -270,6 +278,8 @@ class ChewieController extends ChangeNotifier {
 
   /// Defines a custom RoutePageBuilder for the fullscreen
   final ChewieRoutePageBuilder routePageBuilder;
+    
+  final bool isPortraitMode;  
 
   static ChewieController of(BuildContext context) {
     final chewieControllerProvider =
