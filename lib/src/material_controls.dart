@@ -84,7 +84,9 @@ class _MaterialControlsState extends State<MaterialControls> {
   }
 
   void _dispose() {
-    controller.removeListener(_updateState);
+    if(!chewieController.isFullScreen)
+     controller.removeListener(_updateState);
+    
     _hideTimer?.cancel();
     _initTimer?.cancel();
     _showAfterExpandCollapseTimer?.cancel();
