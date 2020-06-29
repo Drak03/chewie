@@ -66,13 +66,22 @@ class ChewieState extends State<Chewie> {
       _isFullScreen = false;
     }
   }
+  Future<bool> _onBackButtonPress(){
 
+    if (_isFullScreen) {
+      Navigator.of(context, rootNavigator: true).pop();
+      _isFullScreen = false;
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
-    return _ChewieControllerProvider(
+    return WillPopScope(
+      onWillPop: _onBackButtonPress,
+      child:_ChewieControllerProvider(
       controller: widget.controller,
       child: PlayerWithControls(),
-    );
+    ));
   }
 
   Widget _buildFullScreenVideo(
