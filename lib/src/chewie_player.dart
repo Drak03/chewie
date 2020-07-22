@@ -69,7 +69,7 @@ class ChewieState extends State<Chewie> {
     }
   }
  
-  }
+  
   @override
   Widget build(BuildContext context) {
     return _ChewieControllerProvider(
